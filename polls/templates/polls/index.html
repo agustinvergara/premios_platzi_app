@@ -1,0 +1,11 @@
+{#si la variabe latest_question_list = true, entonces muestra el html dentro#}
+{% if latest_question_list %}
+{#<ul> = unordered list#}
+{#<li> = list item#}
+    
+    <ul>
+        {% for question in latest_question_list %}
+            <li><a href="/polls/{{ question.id }}">{{ question.question_text }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
