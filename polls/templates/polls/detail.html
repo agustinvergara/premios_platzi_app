@@ -1,0 +1,45 @@
+<!--lo que quiere decir este form es que la accion va a enviar un post(http) al
+backend el cual es la vista vote(esta vista va a procesar lo que le enviemos)-->
+<form action="{% url 'polls:vote' question.question_id %}" method="post">
+{% csrf_token %}
+
+<fieldset>
+    <legend><h1>{{ question.question_text }}</h1></lenged>
+        {% if error_message %}
+            <p><strong>{{ error_message }}<strong></p>
+        {% else %}
+            {% for choice in question.choice_set.all %}
+                <input
+                    type="radio"
+                    name="choice"
+                    id="choice{{ forloop.counter }}"
+                    value="{{ choice.choice_id }}"
+                >
+                <label for="choice{{ forloop.counter }}">
+                    {{ choice.choice_text }}
+                </label>
+                <br>
+            {% endfor %}
+        {% endif %}
+</fieldset>
+<input
+    type="submit"
+    value="votar"
+>
+</form>
+<form action="{% url 'polls:index' %}">
+    <input
+        type="submit"
+        value="home"
+    >
+</form>
+
+
+<!--<h1>{{question.question_text}}</h1>
+<ul>
+    {#con question.choice_set decimos que use la relacion 1-m de la db para que muestre #}
+    {#las choices que le pertenecen a la pregunta#}
+    {% for choice in question.choice_set.all %}    
+        <li>{{choice.choice_text}}</li>       
+    {% endfor %} 
+</ul> -->

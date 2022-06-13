@@ -4,8 +4,11 @@
 {#<li> = list item#}
     
     <ul>
+        {#hacemos un for para mostrar todas las preguntas que hay en latest_question_list#}
         {% for question in latest_question_list %}
-            <li><a href="/polls/{{ question.id }}">{{ question.question_text }}</a></li>
+            <li><a href="{% url 'polls:detail' question.question_id %}">{{ question.question_text }}</a></li>
         {% endfor %}
     </ul>
+    {% else %}
+    <p>No polls are available.</p>
 {% endif %}
